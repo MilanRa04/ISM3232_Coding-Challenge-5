@@ -1,2 +1,3 @@
 # ISM3232_Coding-Challenge-5
 Create a customer order management system
+In this challenge, you will create a simple system to manage customer orders for a small coffee shop. The system will track customer orders, calculate the total amount due for each order, check the status of orders, and manage inventory for the coffee shop. You’ll use objects to represent orders and products, arrays to store multiple orders, and array/object methods to manipulate the data.
