@@ -48,8 +48,9 @@ function placeOrder(customerName, orderedItems) {
 }
 
 placeOrder('Alice', [{ name: 'Espresso', quantity: 1 }, { name: 'Latte', quantity: 2 }])
+placeOrder('John', [{ name: 'Espresso', quantity: 1 }, { name: 'Latte', quantity: 2 }])
 
-// Task 4: Create a function to calculate total fo ran order
+// Task 4: Create a function to calculate total for an order
 function calculateOrderTotal(order) {
     return order.items.reduce((total, orderItem) => {
         const product = inventory.find(item => item.name === orderItem.name);
@@ -59,6 +60,9 @@ function calculateOrderTotal(order) {
         return total;
     }, 0);
 }
+
+console.log("Order total for Alice: $", calculateOrderTotal(orders[0]));
+
 
 // Task 5: Create a Function to Mark an Order as Completed
 function completeOrder(customerName) {
@@ -75,3 +79,19 @@ function completeOrder(customerName) {
         console.log(`Order not found for customer: ${customerName}.`)
     }
 }
+
+
+// Task 6: Create a function to check pending orders
+function checkPendingOrders() {
+    const pendingOrders = orders.filter(order => order.status === "Pending");
+
+    if (pendingOrders.length > 0) {
+        pendingOrders.forEach(order => {
+            console.log(`Customer: ${order.customerName}, Items: ${JSON.stringify(order.items)}, Status: ${order.status}`);
+        });
+    } else {
+        console.log("No pending orders.");
+    }
+}
+
+checkPendingOrders();
