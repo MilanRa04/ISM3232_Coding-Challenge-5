@@ -10,5 +10,42 @@ const inventory = [
 // Task 2: Create an empty order array of order objects.
 const orders = [];
 
-// orders.push = { name: 'John', item: 'Espresso', quantity: 1, status: 'complete' }
-// console.log(orders)
+
+// Task 3: Create a Function to place an order
+function placeOrder(customerName, orderedItems) {
+    // Check if the items are in stock
+    const stockCheck = orderedItems.every(orderItem => {
+        const product = inventory.find(item => item.name === orderItem.name);
+        if (!product) {
+            console.log(`Product ${orderItem.name} not found in inventory.`);
+            return false;
+        }
+        if (product.quantity < orderItem.quantity) {
+            console.log(`Insufficient stock for ${orderItem.name}.`);
+            return false;
+        }
+        return true;
+    });
+
+    // If stock is sufficient, process the order
+    if (stockCheck) {
+        orderedItems.forEach(orderItem => {
+            const product = inventory.find(item => item.name === orderItem.name);
+            product.quantity -= orderItem.quantity; // Update inventory
+        });
+
+        // Add order to the orders array
+        orders.push({
+            customerName: customerName,
+            items: orderedItems,
+            status: "Pending"
+        });
+
+        console.log(`Order placed successfully for ${customerName}.`);
+    } else {
+        console.error(`Order failed for ${customerName} due to insufficient stock.`);
+    }
+}
+
+placeOrder('Alice', [{ name: 'Espresso', quantity: 1 }, { name: 'Latte', quantity: 2 }])
+
